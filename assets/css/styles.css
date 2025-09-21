@@ -366,48 +366,126 @@ img {
 .skills__css { width: 85%; }
 .skills__js { width: 65%; }
 .skills__ux { width: 80%; }
-.skills__sql { width: 70%; }
+.skills__sql { width: 90%; }
 .skills__java { width: 70%; }
 .skills__python { width: 75%; }
 .skills__react { width: 65%; }
 .skills__node { width: 60%; }
+.skills__excel { width: 85%; }
+.skills__bi { width: 70%; }
+.skills__dbt { width: 70%; }
 
 .skills__img {
   border-radius: 0.5rem;
 }
-
 /* ===== WORK =====*/
 .work__container {
   row-gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
 }
+
 .work__img {
+  width: 320px;             /* fixed width */
+  height: 220px;            /* fixed height */
   box-shadow: 0px 4px 25px rgba(14, 36, 49, 0.15);
   border-radius: 0.5rem;
+  position: relative;
   overflow: hidden;
-}
-.work__img img {
-  transition: 1s;
-}
-.work__img img:hover {
-  transform: scale(1.1);
+  cursor: pointer;
 }
 
+.work__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* makes image cover card without stretching */
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.work__img:hover img {
+  transform: scale(1.05); /* subtle zoom */
+}
+
+/* Overlay */
 .work__overlay {
   position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   bottom: 0;
-  width: 100%;
-  text-align: center;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0); /* transparent before hover */
   color: white;
-  padding: 10px;
-  text-decoration: none; /* Remove hyperlink underline */
-  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+  transition: background 0.3s ease;
 }
 
+/* Dark overlay appears on hover */
+.work__img:hover .work__overlay {
+  background: rgba(0, 0, 0, 0.75);
+}
+
+/* GitHub link icon */
+.work__overlay::before {
+  content: "🔗";
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.2rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.work__img:hover .work__overlay::before {
+  opacity: 1;
+}
+
+/* Project title always visible on top of image */
+.work__title {
+  position: absolute;
+  bottom: 1rem;          /* place near bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: white;
+  text-align: center;
+  z-index: 2;
+  padding: 0.3rem 0.6rem;
+  background-color: rgba(0, 0, 0, 0.5); /* subtle dark background */
+  border-radius: 0.3rem;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* On hover: hide title */
+.work__img:hover .work__title {
+  opacity: 0;
+}
+
+/* Description shows on hover */
+.work__description {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  color: white;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  padding: 0 1rem;
+}
+
+.work__img:hover .work__description {
+  opacity: 1;
+}
+
+/* Links inside overlay */
 .work__overlay a {
-  color: inherit; /* Ensure text inherits color */
-  text-decoration: none; /* No underline */
-  pointer-events: none; /* Prevent clicks on the text itself */
+  color: inherit;
+  text-decoration: none;
 }
 
 /* ===== CONTACT =====*/
